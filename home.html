@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="home.css">
+  <title>Home Page</title>
+</head>
+<body>
+
+  <div class="home-container">
+    <div class="overlay">
+      <h1 class="home-title">MTCGO</h1>
+      <p class="home-text">Transforming reasons into public rides</p>
+      <div class="language-switcher">
+        <div class="language-selector">
+          <button class="language-button" onclick="redirectToPage('login', 'en')">English</button>
+          <button class="language-button" onclick="redirectToPage('login', 'ta')">தமிழ்</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function redirectToPage(page, language) {
+      window.location.href = `${page}_${language}.html`;
+    }
+  </script>
+
+</body>
+</html>

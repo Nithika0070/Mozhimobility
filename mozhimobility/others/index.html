@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Geocoding Browser Position Using Javascript's Geolocation API</title>
+
+	<style type="text/css">
+		html,
+		body {
+			height: 100%;
+			margin: 0px;
+			overflow: hidden;
+			padding: 0px;
+			width: 100%;
+		}
+		#mapContainer {
+			height: 70%;
+			width: 100%;
+		}
+		#destinationInput {
+			margin: 10px;
+		}
+		#directionsPanel {
+			height: 30%;
+			width: 100%;
+		}
+	</style>
+
+	<!-- Include jQuery and Google Map scripts with your API key. -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXNCj4VTiYQmiT93FQ-oDlx3m0UiIO-hE&sensor=false"></script>
+</head>
+<body>
+	<div id="mapContainer">
+		<!-- This is where Google map will go. -->
+	</div>
+	<div id="destinationInput">
+		<label for="destination">Enter Destination:</label>
+		<input type="text" id="destination" placeholder="Enter destination address">
+		<button onclick="calculateAndDisplayRoute()">Get Directions</button>
+	</div>
+	<div id="directionsPanel"></div>
+
+	<script type="text/javascript">
+		var map;
+		var locationMarker = null;
+		var directionsService;
+		var directionsDisplay;
+
+		function initializeMap() {
+			map = new google.maps.Map(
+				document.getElementById("mapContainer"),
+				{
+					zoom: 11,
+					center: new google.maps.LatLng(0, 0),
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				}
+			);
+
+			directionsService = new google.maps.DirectionsService();
+			directionsDisplay = new google.maps.DirectionsRenderer({
+				map: map,
+				panel: document.getElementById("directionsPanel"),
+				suppressMarkers: true
+			});
+
+			navigator.geolocation.getCurrentPosition(
+				function(position) {
+					updateMap(position.coords.latitude, position.coords.longitude, "Initial Position");
+				},
+				function(error) {
+					console.log("Something went wrong: ", error);
+				},
+				{
+					timeout: 5000,
+					maximumAge: 1000 * 60 * 15,
+					enableHighAccuracy: true
+				}
+			);
+
+			var positionTimer = navigator.geolocation.watchPosition(
+				function(position) {
+					updateMap(position.coords.latitude, position.coords.longitude, "Updated / Accurate Position");
+				}
+			);
+
+			setTimeout(function() {
+				navigator.geolocation.clearWatch(positionTimer);
+			}, 1000 * 60 * 5);
+		}
+
+		function updateMap(latitude, longitude, label) {
+			if (!locationMarker) {
+				locationMarker = addMarker(latitude, longitude, label);
+			} else {
+				updateMarker(locationMarker, latitude, longitude, label);
+			}
+			map.setCenter(new google.maps.LatLng(latitude, longitude));
+		}
+
+		function addMarker(latitude, longitude, label) {
+			var marker = new google.maps.Marker({
+				map: map,
+				position: new google.maps.LatLng(latitude, longitude),
+				title: label || ""
+			});
+			return marker;
+		}
+
+		function updateMarker(marker, latitude, longitude, label) {
+			marker.setPosition(new google.maps.LatLng(latitude, longitude));
+			if (label) {
+				marker.setTitle(label);
+			}
+		}
+
+		function calculateAndDisplayRoute() {
+			var start = new google.maps.LatLng(locationMarker.getPosition().lat(), locationMarker.getPosition().lng());
+			var destinationAddress = document.getElementById("destination").value;
+
+			if (!destinationAddress) {
+				alert("Please enter a destination address.");
+				return;
+			}
+
+			directionsService.route(
+				{
+					origin: start,
+					destination: destinationAddress,
+					travelMode: google.maps.TravelMode.DRIVING
+				},
+				function(response, status) {
+					if (status === google.maps.DirectionsStatus.OK) {
+						directionsDisplay.setDirections(response);
+					} else {
+						handleDirectionsError(status);
+					}
+				}
+			);
+		}
+
+		function handleDirectionsError(status) {
+			var errorMessage = 'Error with the directions request: ' + status;
+			console.error(errorMessage);
+			alert(errorMessage);
+		}
+
+		google.maps.event.addDomListener(window, 'load', initializeMap);
+	</script>
+</body>
+</html>

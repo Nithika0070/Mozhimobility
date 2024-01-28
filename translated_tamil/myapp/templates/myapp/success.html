@@ -1,0 +1,88 @@
+{% extends 'myapp/base.html' %} {% block content %}
+
+<!--div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <form action="{% url 'signout' %}" method="post">
+                {% csrf_token %} {{user}} successful login! {{id}}
+                <div class="pull-right">
+                    <button type="Submit" class="btn btn-success float-right">Sign out</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>-->
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+    
+    .container {
+        display: flex;
+        align-items: center; /* Center content vertically */
+    }
+    
+    .image-container {
+        width: 50%; /* Adjust width as needed */
+        height: 100%;
+        padding: 20px;
+    }
+    
+    .image-container img {
+        max-width: 553px;
+        height: 553px;
+    }
+    
+    .content {
+        width: 70%; /* Adjust width as needed */
+        padding: 20px;
+    }    
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Left Image Layout</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img src="data:image/jpeg;base64,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" alt="Your Image">
+        </div>
+        <div class="content">
+            <!-- Your content goes here -->
+            <h1 id="content-area"><!--content should be displayed here--></h1>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+<script>
+    // Define an array with three different content options
+const contentOptions = [
+    "பொது போக்கு தனிப்பட்ட வாகனத்தை உள்ளமைக்கும் மற்றும் பராமரிக்கும் விலை தனிப்பட்ட வாகனத்தை வேகமாக 5 முறையும் குறைக்கும் என்று சொல்லப்படுகிறது.",
+    "ஒரு பயணியின் ஒரு பயனர் கிலோமீட்டருக்கு பொது போக்கு செய்யும் கார்பன் டயாக்சைட், தனிப்பட்ட வாகனங்களில் உள்ள கார்பன் டயாக்சைட்டுகளுக்கு அதிகமாக உண்டு என்று கூறப்படுகின்றது.",
+    "ஒரு முழு பஸ் ஒரு சாலையில் 40 கார்களை நீக்கலாம், தவிர்க்கும் சோதனை மற்றும் பயணிகளுக்கு நாளைக்கு சரியான 30 நிமிட செலவினை சேமிக்கின்றது.."
+];
+
+// Function to randomly select content
+function selectRandomContent() {
+    // Generate a random index between 0 and 2 (inclusive)
+    const randomIndex = Math.floor(Math.random() * contentOptions.length);
+    // Return the content corresponding to the random index
+    return contentOptions[randomIndex];
+}
+
+// Display random content when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Select random content
+    const selectedContent = selectRandomContent();
+    // Display the selected content in the appropriate area of your webpage
+    document.getElementById('content-area').textContent = selectedContent;
+});
+</script>
+</html>
+{% endblock %}

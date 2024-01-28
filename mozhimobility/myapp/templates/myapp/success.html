@@ -1,0 +1,88 @@
+{% extends 'myapp/base.html' %} {% block content %}
+
+<!--div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <form action="{% url 'signout' %}" method="post">
+                {% csrf_token %} {{user}} successful login! {{id}}
+                <div class="pull-right">
+                    <button type="Submit" class="btn btn-success float-right">Sign out</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>-->
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+    
+    .container {
+        display: flex;
+        align-items: center; /* Center content vertically */
+    }
+    
+    .image-container {
+        width: 50%; /* Adjust width as needed */
+        height: 50%;
+        padding: 20px;
+    }
+    
+    .image-container img {
+        max-width: 450px;
+        height: 450px;
+    }
+    
+    .content {
+        width: 70%; /* Adjust width as needed */
+        padding: 20px;
+    }    
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Left Image Layout</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img src="https://cdn-icons-png.flaticon.com/512/1441/1441204.png" alt="Your Image">
+        </div>
+        <div class="content">
+            <!-- Your content goes here -->
+            <h1 id="content-area"><!--content should be displayed here--></h1>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+<script>
+    // Define an array with three different content options
+const contentOptions = [
+    "Public transport can be up to 5 times cheaper than owning and maintaining a private vehicle",
+    "Public transport emits up to 6 times less carbon dioxide per passenger kilometer than private cars",
+    "A single full bus can take up to 40 cars off the road, reducing congestion and saving commuters an average of 30 minutes per day in travel time."
+];
+
+// Function to randomly select content
+function selectRandomContent() {
+    // Generate a random index between 0 and 2 (inclusive)
+    const randomIndex = Math.floor(Math.random() * contentOptions.length);
+    // Return the content corresponding to the random index
+    return contentOptions[randomIndex];
+}
+
+// Display random content when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Select random content
+    const selectedContent = selectRandomContent();
+    // Display the selected content in the appropriate area of your webpage
+    document.getElementById('content-area').textContent = selectedContent;
+});
+</script>
+</html>
+{% endblock %}

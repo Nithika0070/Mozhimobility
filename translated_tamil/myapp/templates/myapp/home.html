@@ -1,0 +1,101 @@
+<!--<div class="container py-5">
+    <div class="card bg-gradient bg-success">
+        <div class="card-body">
+            <h2 class="my-3 text-center text-light">Welcome to MozhiMobility</h2>
+        </div>
+    </div>
+</div>-->
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'YourChosenFont', sans-serif; /* Replace 'YourChosenFont' with the desired font */
+  }
+  
+  .home-container {
+    background-image: url('https://i.pinimg.com/736x/94/51/bb/9451bb028df94abeb11f596c1ac4d579.jpg'); /* Replace with the path to your background image */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff; /* Set the text color to contrast with the background */
+  }
+  
+  .overlay {
+    background-color: rgba(0, 0, 0, 0.7); /* Black transparent background */
+    padding: 100px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .home-title {
+    font-size: 3em;
+    margin-bottom: 20px;
+  }
+  
+  .home-text {
+    font-size: 1.0em;
+    font-family: "Times New Roman", Times, serif;
+  }
+  .home-title{
+    font-weight: bold;
+  }
+  .language-switcher {
+    margin-top: 20px;
+  }
+  .language-selector {
+    margin-top: 10px;
+  }
+  
+  .language-button {
+    margin-right: 10px;
+    padding: 20px 20px; /* Adjust the padding for the button size */
+    font-size: 1em;
+    background-color: #000000; /* Black background color */
+    color: #ffffff; /* White text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .language-button:hover {
+    background-color: #333333; /* Darker black on hover */
+  }
+</style>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="home.css">
+  <title>Home Page</title>
+</head>
+<body>
+
+  <div class="home-container">
+    <div class="overlay">
+      <h1 class="home-title">மொழிMobility</h1>
+      <p class="home-text">Transforming reasons into public rides</p>
+      <div class="language-switcher">
+        <div class="language-selector">
+          <button class="language-button" onclick="redirectToPage('login', 'ta')">English</button>
+          <button class="language-button" onclick="redirectToPage('login', 'en')">தமிழ்</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function redirectToPage(page, language) {
+      window.location.href = `${page}_${language}.html`;
+    }
+  </script>
+
+</body>
+</html>
+

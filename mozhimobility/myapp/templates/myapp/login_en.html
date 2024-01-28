@@ -1,0 +1,120 @@
+{% extends 'myapp/base.html' %} {% block content %}
+<style>
+    body {
+        background-image: url("https://media.assettype.com/TNIE%2Fimport%2F2024%2F1%2F5%2Foriginal%2FOne_more_Kilambakkam.jpg?auto=format%2Ccompress&fit=max&w=400&dpr=2.6");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed; 
+        background-repeat: no-repeat;
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+</style>
+<div class="container  py-3">
+    <div class="card bg-info bg-gradient">
+        <div class="card-body">
+            <h2 class="my-3 text-center text-light">Welcome to MozhiMobility</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <div class="col-lg-5 col-md-7 col-sm-10 col-xs-12">
+            <div class="card rounded-0">
+                <div class="card-header">
+                    <div class="card-title h3 fw-bolde mb-0 text-center">Login</div>
+                </div>
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <form action="{% url 'signin' %}" method="post" id="signin-form">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="username" class="control-label">Username:</label>
+                                <input name='name' class="form-control rounded-0" type="text" id="username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="example-email-input" class="control-label">Password:</label>
+                                <input name='password' class="form-control rounded-0" type="password" required>
+                            </div>
+
+                        </form>
+                        <p>{{error}}</p>
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    <button class="btn btn-sm rounded-0 btn-primary btn-block w-100" form="signin-form">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+<!--<!DOCTYPE html>
+<html>
+<style>
+        body {
+            background-image: url("https://media.assettype.com/TNIE%2Fimport%2F2024%2F1%2F5%2Foriginal%2FOne_more_Kilambakkam.jpg?auto=format%2Ccompress&fit=max&w=400&dpr=2.6");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; 
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        form {
+            color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            width: 300px;
+            margin: 0 auto;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 1px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        input[type="button"] {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+        .redirect-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #000;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        }
+</style>
+<head>
+    <title>Login page</title>
+</head>
+<body>
+    <br><br><br><br><br><br><br><br><br><br>
+    <form method="POST" action="login_en.html">
+        <h1>LOGIN FORM</h1>
+        <input type="text" name="username" placeholder="Username" /><br><br>
+        <input type="password" name="password" placeholder="Password" /><br><br>
+        <input type="submit" value="Login" onClick="display(this.form)" />
+    </form>
+    </div>	
+        <center>
+            <button class="button-container">
+                <a href="{% url 'signup' %}" class="redirect-button">SIGNUP</a>
+            </button>
+        </center>
+	</div>
+</body>
+</html>
+-->
